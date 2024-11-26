@@ -1,6 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as dotenv from 'dotenv';
 
+// dotenv를 가장 먼저 호출하여 환경 변수 로드
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
