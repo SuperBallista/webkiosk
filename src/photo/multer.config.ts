@@ -1,17 +1,18 @@
 import { v2 as cloudinary } from 'cloudinary';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import * as multer from 'multer';
+import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
+import { ConfigService } from '@nestjs/config';
 
-// Cloudinary 설정
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+export const CloudinaryConfig = (configService: ConfigService) => {
+  cloudinary.config({
+    cloud_name: configService.get<string>('CLOUDINARY_CLOUD_NAME'),
+    api_key: configService.get<string>('CLOUDINARY_API_KEY'),
+    api_secret: configService.get<string>('CLOUDINARY_API_SECRET'),
+  });
+};
 
-
-export const multerOptions = {
-  storage: multer.memoryStorage(), // 메모리에 파일 저장
+export const multerOptions: MulterOptions = {
+  storage: multer.memoryStorage(), 
   fileFilter: (req, file, cb) => {
     if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
       cb(null, true);
