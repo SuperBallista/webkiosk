@@ -3,12 +3,14 @@ import { Response } from 'express';
 import axios from 'axios';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../auth.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('/auth/google')
 export class GoogleAuthController {
   constructor(
     private readonly userService: UserService,
     private readonly authService: AuthService,
+    private readonly configService: ConfigService,
   ) {}
 
   @Get('/callback')
@@ -23,7 +25,7 @@ export class GoogleAuthController {
       const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
         client_id: process.env.GOOGLE_CLIENT_ID,
         client_secret: process.env.GOOGLE_CLIENT_SECRET,
-        redirect_uri: 'http://localhost:5000/auth/google/callback',
+        redirect_uri: `${this.configService.get<string>('REDIRECT_URL')}auth/google/callback`,
         grant_type: 'authorization_code',
         code,
       });
