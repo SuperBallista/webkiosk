@@ -23,12 +23,6 @@ import { CloudinaryProvider } from './photo/cloudinary.provider';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // ConfigService를 사용하기 위해 ConfigModule 추가
       useFactory: (configService: ConfigService) => {
-        // 데이터베이스 환경변수 로깅
-        console.log('DB_HOST:', configService.get<string>('DB_HOST'));
-        console.log('DB_PORT:', configService.get<number>('DB_PORT'));
-        console.log('DB_USER:', configService.get<string>('DB_USER'));
-        console.log('DB_NAME:', configService.get<string>('DB_NAME'));
-        console.log('HTTPS:', configService.get<string>('HTTPS'));
 
         return {
           type: 'mariadb',
@@ -49,16 +43,4 @@ import { CloudinaryProvider } from './photo/cloudinary.provider';
   ],
   providers: [CloudinaryProvider],
 })
-export class AppModule implements OnModuleInit {
-  constructor(private configService: ConfigService) {}
-
-  onModuleInit() {
-    // 모듈 초기화 시 전체 환경변수 로깅
-    console.log('=== All Environment Variables ===');
-    Object.keys(process.env).forEach(key => {
-      if (key.startsWith('DB_') || key.startsWith('CLOUDINARY_') || key === 'HTTPS') {
-        console.log(`${key}: ${process.env[key]}`);
-      }
-    });
-  }
-}
+export class AppModule {}
