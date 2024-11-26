@@ -8,6 +8,10 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CloudinaryProvider } from './photo/cloudinary.provider';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 
 @Module({
   imports: [
