@@ -13,13 +13,11 @@ export class PhotoService {
 
   // 1. 특정 user_id로 사진 조회
   async loadPhotos(userId: string): Promise<Photo[]> {
-    console.log('Fetching photos for user_id:', userId);
 
     const results = await this.photoRepository.find({
       where: { user_id: userId }, // user_id가 일치하는 조건
     });
 
-    console.log('Query Results:', results); // 결과 디버깅
     return results;
   }
 
@@ -32,7 +30,6 @@ export class PhotoService {
             console.error('Cloudinary upload error:', error);
             reject(error);
           } else {
-            console.log('Cloudinary upload result:', result);
             resolve(result);
           }
         },
@@ -44,7 +41,6 @@ export class PhotoService {
     try {
       // Cloudinary에 파일 업로드
       const uploadResult = await this.uploadToCloudinary(file);
-      console.log('Cloudinary upload result:', uploadResult);
   
       // DB에 파일 정보 저장
       const newPhoto = this.photoRepository.create({
@@ -53,7 +49,6 @@ export class PhotoService {
         src: uploadResult.secure_url, // Cloudinary URL
         title: fileTitle, // 파일 이름
       });
-      console.log('Creating photo record in DB:', newPhoto);
   
       const savedPhoto = await this.photoRepository.save(newPhoto);
       console.log('Photo saved to database:', savedPhoto);

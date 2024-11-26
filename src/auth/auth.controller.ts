@@ -8,7 +8,6 @@ export class AuthController {
   @Post('/validate')
   async validateToken(@Body('token') token: string) {
     try {
-      console.log('Token:', token);
       const isValid = this.authService.validateToken(token);
       return { valid: isValid }; // 유효한 경우 valid: true 반환
     } catch (error) {

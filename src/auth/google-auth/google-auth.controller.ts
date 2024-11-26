@@ -40,7 +40,6 @@ export class GoogleAuthController {
 
       // JWT 생성
       const token = this.authService.generateToken({ id: user.id, email: user.email });
-      console.log('Generated token:', token);
 
       // 클라이언트로 JWT 전송
       return res.redirect(`/admin?token=${token}`);

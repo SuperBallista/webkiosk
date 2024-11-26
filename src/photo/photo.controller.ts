@@ -11,7 +11,6 @@ export class PhotoController {
 
   @Get('/load')
   async getPhotos(@Query('id') id: string) {
-    console.log(id);
     return await this.photoService.loadPhotos(id);
   }
 
