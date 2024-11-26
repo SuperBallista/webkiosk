@@ -18,7 +18,7 @@ import { CloudinaryProvider } from './photo/cloudinary.provider';
       isGlobal: true, // 환경 변수 모듈을 전역으로 설정
     }),
     TypeOrmModule.forRoot({
-      type: 'mariadb',
+      type: 'mysql',
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USER,
