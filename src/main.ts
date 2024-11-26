@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+dotenv.config();
 
 async function bootstrap() {
     console.log(process.env.DB_PORT);
