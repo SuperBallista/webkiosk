@@ -23,13 +23,6 @@ import { CloudinaryProvider } from './photo/cloudinary.provider';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // ConfigService를 사용하기 위해 ConfigModule 추가
       useFactory: (configService: ConfigService) => {
-        // 데이터베이스 환경변수 로깅
-        console.log('DB_HOST:', configService.get<string>('DB_HOST'));
-        console.log('DB_PORT:', configService.get<number>('DB_PORT'));
-        console.log('DB_USER:', configService.get<string>('DB_USER'));
-        console.log('DB_NAME:', configService.get<string>('DB_NAME'));
-        console.log('HTTPS:', configService.get<string>('HTTPS'));
-
         return {
           type: 'mariadb',
           host: configService.get<string>('DB_HOST'),
