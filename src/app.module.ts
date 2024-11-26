@@ -23,7 +23,7 @@ import { CloudinaryProvider } from './photo/cloudinary.provider';
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME_WEB,
+      database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'], // 엔티티 경로 설정
       synchronize: process.env.HTTPS === 'false', // 개발 환경에서만 true
     }),
