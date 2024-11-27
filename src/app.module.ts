@@ -33,6 +33,9 @@ import { CloudinaryProvider } from './photo/cloudinary.provider';
           database: configService.get<string>('DB_NAME'),
           entities: [__dirname + '/**/*.entity{.ts,.js}'], // 엔티티 경로
           synchronize: configService.get<string>('HTTPS') === 'false', // HTTPS가 'false'일 경우만 true
+          extra: {
+            connectionLimit: 10, // 동시에 최대 10개의 연결만 사용
+          },
         };
       },
       inject: [ConfigService], // ConfigService 주입
